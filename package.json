@@ -1,7 +1,7 @@
 {
   "name": "react-gemini-chatbot",
-  "version": "0.1.0", 
-  "description": "A React chatbot component using Gemini.",
+  "version": "1.1.1", 
+  "description": "The only chatbot that works out of box powered by gemini",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "files": [
@@ -9,15 +9,20 @@
   ],
   "repository": {
     "type": "git",
-    "url": "your-repo-url"
+    "url": "https://github.com/duke7able/react-gemini-chatbot"
   },
   "keywords": [
     "react",
     "chatbot",
     "gemini",
-    "component"
+    "component",
+    "AI",
+    "Artificial Intelligence",
+    "RAG",
+    "google",
+    "google-chatbot"
   ],
-  "author": "Your Name",
+  "author": "Shreyan Mehta",
   "license": "MIT",     
   "private": false,     
   "type": "module",     
