@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/main.jsx'),
+      entry: path.resolve(__dirname, 'src/ChatBot.jsx'),
       name: 'ReactGeminiChatbot',
       fileName: (format) => `index.${format}.js`,
     },

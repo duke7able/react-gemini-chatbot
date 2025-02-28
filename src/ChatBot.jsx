@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Chat from "./UserChat";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { sendMessageToGemini } from "./ApiRes";
 
 const ChatBot = ({

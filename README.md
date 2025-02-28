@@ -4,12 +4,11 @@ A modern, customizable React chatbot component that integrates with Google's Gem
 
 ## Badges
 
-[![NPM Version](https://img.shields.io/npm/v/chat-window)](https://www.npmjs.com/package/chat-window)
-[![License](https://img.shields.io/npm/l/chat-window)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/github/workflow/status/YOUR_GITHUB_USERNAME/chat-window/CI)](https://github.com/YOUR_GITHUB_USERNAME/chat-window/actions)
-[![GitHub Stars](https://img.shields.io/github/stars/YOUR_GITHUB_USERNAME/chat-window?style=social)](https://github.com/YOUR_GITHUB_USERNAME/chat-window/stargazers)
-[![React Version](https://img.shields.io/npm/dependency-version/chat-window/peer/react)](https://www.npmjs.com/package/react)
-[![Vite Version](https://img.shields.io/npm/dependency-version/chat-window/dev/vite)](https://vitejs.dev/)
+[![NPM Version](https://img.shields.io/npm/v/react-gemini-chatbot)](https://www.npmjs.com/package/react-gemini-chatbot)
+[![License](https://img.shields.io/npm/l/react-gemini-chatbot)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/github/workflow/status/duke7able/react-gemini-chatbot/CI)](https://github.com/duke7able/react-gemini-chatbot/actions)
+[![GitHub Stars](https://img.shields.io/github/stars/duke7able/react-gemini-chatbot?style=social)](https://github.com/duke7able/react-gemini-chatbot)
+[![React Version](https://img.shields.io/npm/dependency-version/react-gemini-chatbot/peer/react)](https://www.npmjs.com/package/react)[![Vite Version](https://img.shields.io/npm/dependency-version/react-gemini-chatbot/dev/vite)](https://vitejs.dev/)
 
 ### Style & Framework
 

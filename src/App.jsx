@@ -1,5 +1,5 @@
 import React from "react";
-import ChatBot from "./ChatBot/ChatBot";
+import ChatBot from "./ChatBot";
 
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY
