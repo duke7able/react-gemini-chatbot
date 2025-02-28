@@ -1,6 +1,6 @@
 {
   "name": "react-gemini-chatbot",
-  "version": "1.1.2", 
+  "version": "1.1.3",
   "description": "The only chatbot that works out of box powered by gemini",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -10,6 +10,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/duke7able/react-gemini-chatbot"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
   },
   "keywords": [
     "react",
