@@ -1,6 +1,6 @@
 {
   "name": "react-gemini-chatbot",
-  "version": "1.1.1", 
+  "version": "1.1.2", 
   "description": "The only chatbot that works out of box powered by gemini",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
