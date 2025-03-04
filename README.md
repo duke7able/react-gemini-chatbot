@@ -64,20 +64,15 @@ yarn add react-gemini-chatbot
 
 ### Basic Implementation
 
-```jsx
-import React from "react";
+```tsx
 import ChatBot from "react-gemini-chatbot";
 
 function App() {
-  // Get your API key
-  const apiKey = "YOUR_GEMINI_API_KEY";
-  // Configure your chatbot
-  const prompt = "Your system prompt here";
   return (
-    <div className="App">
-      <ChatBot apiKey={apiKey} prompt={prompt} />
-    </div>
-  );
+    <main style={{ height: "100vh" }}>
+      <Chatbot apiKey={"--gemini api key--"} prompt={"hello gemini ai"} />
+    </main>
+  )
 }
 
 export default App;

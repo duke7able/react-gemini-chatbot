@@ -12,9 +12,6 @@ dist
 dist-ssr
 *.local
 
-#package-lock.json
-package-lock.json
-
 .env
 .github
 
