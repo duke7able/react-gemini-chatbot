@@ -16,7 +16,7 @@ interface StyledProps {
   isUser?: boolean;
   isrecording?: number;
   themeColor?: string;
-  textPosition?: "yes" | "no";
+  textPosition?: boolean;
   backGroundImage?: string;
   open?: boolean;
 }
@@ -98,7 +98,7 @@ export const MessageWrapper = styled(Box) <StyledProps>`
   display: flex;
   justify-content: ${({ isUser }) => (isUser ? "flex-end" : "flex-start")};
   justify-content: ${({ textPosition, isUser }) => {
-    if (textPosition === "yes") {
+    if (textPosition) {
       return isUser ? "flex-start" : "flex-end";
     } else {
       return isUser ? "flex-end" : "flex-start";
@@ -151,7 +151,7 @@ export const StyleImage = styled.div`
 export const MessageContent = styled(Box) <StyledProps>`
   display: flex;
   flex-direction: ${({ isUser, textPosition }) => {
-    if (textPosition === "yes") {
+    if (textPosition) {
       return isUser ? "row" : "row-reverse";
     } else {
       return isUser ? "row-reverse" : "row";

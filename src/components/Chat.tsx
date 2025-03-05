@@ -52,7 +52,7 @@ export type ChatProps = {
     handleMessageBeingSent: (messageText: string, attachment: File | null) => Promise<void>;
     isLoading: boolean;
     imageUrl?: string;
-    textPosition?: "yes" | "no";
+    textPosition?: boolean;
     chatOpen?: boolean;
     titleOfChatBot?: string;
     descriptionOfChatbot?: string;
@@ -74,7 +74,7 @@ const Chat = ({
     isLoading = false,
     Header,
     imageUrl,
-    textPosition = "no",
+    textPosition = false,
     chatOpen = true,
     titleOfChatBot = "",
     descriptionOfChatbot = "",

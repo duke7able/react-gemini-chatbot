@@ -1,4 +1,7 @@
 import { UserMessage } from "../components/Chatbot";
+import { v4 as uuidv4 } from 'uuid'; 
+import { ApiResponsePayload, sendApiResponse } from "./apiBackend";
+
 
 export type SendMessageToGeminiParams = {
     apiKey: string,
@@ -10,7 +13,10 @@ export type SendMessageToGeminiParams = {
     fileName: string | null,
     temperature: number,
     useContext: boolean,
-    apiMaxOutputTokens: number
+    apiMaxOutputTokens: number,
+    APIStoreResponseDataEndpoint: string,
+    APIAccessToken: string,
+    APIHttpMethod?: "POST" | "GET" | "PUT"
 }
 
 interface GeminiApiResponse {
@@ -36,7 +42,10 @@ export async function sendMessageToGemini(
         fileName = null,
         temperature,
         useContext,
-        apiMaxOutputTokens
+        apiMaxOutputTokens,
+        APIStoreResponseDataEndpoint,
+        APIAccessToken,
+        APIHttpMethod
     }: SendMessageToGeminiParams
 ) {
     const apiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent`;
@@ -91,7 +100,27 @@ export async function sendMessageToGemini(
     }
 
     const data: GeminiApiResponse = await response.json();
+    
+    let uuid = localStorage.getItem("userUUID");
+  if (!uuid) {
+    uuid = uuidv4();
+    localStorage.setItem("userUUID", uuid);
+  }
 
+  if (APIStoreResponseDataEndpoint && APIStoreResponseDataEndpoint !== "") {
+    const apiPayload: ApiResponsePayload = {
+      userUUID: uuid,
+      userMessage: userMessageText,
+      modelMessage: data.candidates[0].content.parts[0].text,
+    };
+
+    await sendApiResponse(
+        APIStoreResponseDataEndpoint,
+      APIAccessToken,
+      apiPayload,
+      APIHttpMethod || "POST"
+    );
+  }
     if (
         data.candidates &&
         data.candidates[0] &&

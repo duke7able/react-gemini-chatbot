@@ -6,9 +6,9 @@ A modern, customizable React chatbot component that integrates with Google's Gem
 
 [![NPM Version](https://img.shields.io/npm/v/react-gemini-chatbot)](https://www.npmjs.com/package/react-gemini-chatbot)
 [![License](https://img.shields.io/npm/l/react-gemini-chatbot)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/github/workflow/status/duke7able/react-gemini-chatbot/CI)](https://github.com/duke7able/react-gemini-chatbot/actions)
+[![Build Status](https://img.shields.io/badge/Status-Success-brightgreen)](https://github.com/duke7able/react-gemini-chatbot)
 [![GitHub Stars](https://img.shields.io/github/stars/duke7able/react-gemini-chatbot?style=social)](https://github.com/duke7able/react-gemini-chatbot)
-[![React Version](https://img.shields.io/npm/dependency-version/react-gemini-chatbot/peer/react)](https://www.npmjs.com/package/react)[![Vite Version](https://img.shields.io/npm/dependency-version/react-gemini-chatbot/dev/vite)](https://vitejs.dev/)
+[![React Version](https://img.shields.io/npm/dependency-version/react-gemini-chatbot/peer/react)](https://www.npmjs.com/package/react)[![Node Version](https://img.shields.io/static/v1?label=Node&message=v18&color=green)](https://nodejs.org/)
 
 ### Style & Framework
 
@@ -78,28 +78,6 @@ function App() {
 export default App;
 ```
 
-## Props
-
-| Prop                   | Type    | Default            | Required | Description                                                                                                          |
-| ---------------------- | ------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
-| `apiKey`               | string  | `""`               | _Yes_    | Your Google Gemini API key.                                                                                          |
-| `prompt`               | string  | `""`               | _Yes_    | System prompt to define the chatbot's behavior.                                                                      |
-| `model`                | string  | `gemini-1.5-flash` | _No_     | Gemini model to use (e.g., "gemini-1.5-flash").                                                                      |
-| `TitleOfChatBot`       | string  | `"ChatBot"`        | _No_     | Display name for the chatbot.                                                                                        |
-| `temperature`          | number  | `0.7`              | _No_     | Controls the randomness of the responses (0.0-1.0).                                                                  |
-| `useContext`           | boolean | `false`            | _No_     | Whether to maintain conversation context.                                                                            |
-| `apiMaxOutputTokens`   | number  | `2048`             | _No_     | Maximum tokens allowed in the API response.                                                                          |
-| `chatOpen`             | boolean | `true`             | _No_     | Controls the visibility of the chat window (open or closed).                                                         |
-| `imageUrl`             | string  | `"https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`  | _No_     | URL for the chatbot's avatar image.                                                                                  |
-| `textPosition`         | string  | `"no"`             | _No_     | By default, the user’s text is displayed on the right side. To change the alignment of the user's text to the left side and ai response to right, pass "yes"     |
-| `Header`       | string  | `"ChatOrbit"`      | _No_     | To display your own chatbot Header, pass a value as a string.                                                         |
-| `headerDescription`    | string  | `"Ready to help"`  | _No_     | To display your own header description for the chatbot, pass a value as a string.                                    |
-| `titleOfChatBot` | string  | `"👋 Welcome to ChatOrbit"`             | _No_     | To display your own Title of the chatbot, pass a value as a string.                                            |
-| `descriptionOfChatbot` | string  | `"Start a conversation by typing a message below"`             | _No_     | To display your own description of the chatbot, pass a value as a string.                                            |
-| `themeColor`          | string  | `"purple"`             | _No_     | To set your own color theme for the chatbot, pass a color name or hex code as a string (e.g., `"red"`, `"#FF5733"`). |
-| `backGroundImage`      | string  | `"https://img.freepik.com/free-vector/light-grey-dots-background_78370-2583.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`             | _No_     | To set your own background image, pass the image URL or path as a string (e.g., `"https://placehold.co/600x400"`).   |
-
-
 # Setting Up Google Gemini API Key
 
 To get started with Google Gemini API, you'll need to generate an API key. Follow the steps below to create the key and secure it for your project.
@@ -118,6 +96,42 @@ This documentation will walk you through the process of creating and managing yo
 ### Install Dependencies in Your Project
 
 Make sure you have the required dependencies installed in your project.
+
+
+## Props
+
+| Prop                   | Type    | Default            | Required | Description                                                                                                          |
+| ---------------------- | ------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`               | string  | `""`               | _Yes_    | Your Google Gemini API key.                                                                                          |
+| `prompt`               | string  | `""`               | _Yes_    | System prompt to define the chatbot's behavior.                                                                      |
+| `model`                | string  | `gemini-1.5-flash` | _No_     | Gemini model to use (e.g., "gemini-1.5-flash").                                                                      |
+| `TitleOfChatBot`       | string  | `"ChatBot"`        | _No_     | Display name for the chatbot.                                                                                        |
+| `temperature`          | number  | `0.7`              | _No_     | Controls the randomness of the responses (0.0-1.0).                                                                  |
+| `useContext`           | boolean | `false`            | _No_     | Whether to maintain conversation context.                                                                            |
+| `apiMaxOutputTokens`   | number  | `2048`             | _No_     | Maximum tokens allowed in the API response.                                                                          |
+| `chatOpen`             | boolean | `true`             | _No_     | Controls the visibility of the chat window (open or closed).                                                         |
+| `imageUrl`             | string  | `"https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`  | _No_     | URL for the chatbot's avatar image.                                                                                  |
+| `textPosition`         | string  | `false`             | _No_     | By default, the user’s text is displayed on the right side. To change the alignment of the user's text to the left side and ai response to right, pass true     |
+| `Header`       | string  | `"ChatOrbit"`      | _No_     | To display your own chatbot Header, pass a value as a string.                                                         |
+| `headerDescription`    | string  | `"Ready to help"`  | _No_     | To display your own header description for the chatbot, pass a value as a string.                                    |
+| `titleOfChatBot` | string  | `"👋 Welcome to ChatOrbit"`             | _No_     | To display your own Title of the chatbot, pass a value as a string.                                            |
+| `descriptionOfChatbot` | string  | `"Start a conversation by typing a message below"`             | _No_     | To display your own description of the chatbot, pass a value as a string.                                            |
+| `themeColor`          | string  | `"purple"`             | _No_     | To set your own color theme for the chatbot, pass a color name or hex code as a string (e.g., `"red"`, `"#FF5733"`). |
+| `backGroundImage`      | string  | `"https://img.freepik.com/free-vector/light-grey-dots-background_78370-2583.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`             | _No_     | To set your own background image, pass the image URL or path as a string (e.g., `"https://placehold.co/600x400"`).   |
+| `APIStoreResponseDataEndpoint`      | string  | `""`             | _No_     | Add your endpoint url of backend to store every converstion of chatbot in database(eg, https://localhost:5173/route).   |
+| `APIAccessToken`      | string  | `""`             | _No_     | In your endpoint url of backend is there any authorization then you can share your bearertoken.   |
+| `APIHttpMethod`                           | string     | `"POST"`          | No           | Configure the HTTP method to use for the API request. Options: `"POST"`, `"PUT"`, or `"GET"`. The default method is `"POST"`. |
+
+# Backend Api To Store Data
+
+- **`APIStoreResponseDataEndpoint`**: This is the URL of the backend where the chatbot conversation should be stored. The URL should point to an API route that can accept a `POST`, `PUT`, or `GET` request. If your backend requires authorization, you can provide the `APIAccessToken` to authenticate the request.
+  
+- **`APIAccessToken`**: If your backend requires authentication, this parameter will store the Bearer token that should be included in the request's authorization header. This is optional and should only be set if your API requires it.
+
+- **`APIHttpMethod`**: This variable specifies the HTTP method used for the request. It can be set to:
+    - `"POST"`: Sends the data as JSON in the request body (default method).
+    - `"PUT"`: Sends the data as JSON in the request body.
+    - `"GET"`: Sends the data as query parameters in the URL.
 
 
 ## Features in Detail
