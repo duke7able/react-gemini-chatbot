@@ -17,7 +17,7 @@ interface StyledProps {
   isrecording?: number;
   themeColor?: string;
   textPosition?: "yes" | "no";
-  BackGroundImage?: string;
+  backGroundImage?: string;
   open?: boolean;
 }
 
@@ -73,9 +73,9 @@ export const MessagesList = styled(Box) <StyledProps>`
   overflow-y: auto;
   background-color: #ffffff;
   background-image: ${(props) =>
-    props.BackGroundImage && props.BackGroundImage !== ""
-      ? `url(${props.BackGroundImage})`
-      : `url('/backgroundImage.jpg')`}; 
+    props.backGroundImage && props.backGroundImage !== ""
+      ? `url(${props.backGroundImage})`
+      : `url('./public/backgroundImage.jpg')`}; 
   background-size: cover; 
   background-position: center;
   scroll-behavior: smooth;

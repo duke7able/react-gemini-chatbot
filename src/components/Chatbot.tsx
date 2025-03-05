@@ -17,10 +17,10 @@ type ChatbotProps = {
     textPosition?: "yes" | "no",
     chatOpen?: boolean,
     titleOfChatBot?: string,
-    DescriptionOfChatbot?: string,
+    descriptionOfChatbot?: string,
     headerDescription?: string,
     themeColor?: string,
-    BackGroundImage?: string
+    backGroundImage?: string
 }
 
 export type UserMessage = {
@@ -42,14 +42,14 @@ function Chatbot(
         temperature = 0.7,
         useContext = false,
         apiMaxOutputTokens = 2048,
-        imageUrl = "/chatbotimage.png",
+        imageUrl = "./public/chatbotimage.png",
         textPosition = "no",
         chatOpen = true,
         titleOfChatBot = "",
-        DescriptionOfChatbot = "Start a conversation by typing a message below",
+        descriptionOfChatbot = "Start a conversation by typing a message below",
         headerDescription = "Ready to help",
         themeColor = "",
-        BackGroundImage = ""
+        backGroundImage = ""
     }: ChatbotProps
 ) {
 
@@ -186,10 +186,10 @@ function Chatbot(
                 textPosition={textPosition}
                 chatOpen={chatOpen}
                 titleOfChatBot={titleOfChatBot}
-                DescriptionOfChatbot={DescriptionOfChatbot}
+                descriptionOfChatbot={descriptionOfChatbot}
                 headerDescription={headerDescription}
                 themeColor={themeColor}
-                BackGroundImage={BackGroundImage} Header={Header} />
+                backGroundImage={backGroundImage} Header={Header} />
         </Container>
     )
 }

@@ -65,12 +65,12 @@ yarn add react-gemini-chatbot
 ### Basic Implementation
 
 ```tsx
-import ChatBot from "react-gemini-chatbot";
+import {ChatBot} from "react-gemini-chatbot";
 
 function App() {
   return (
-    <main style={{ height: "100vh" }}>
-      <Chatbot apiKey={"--gemini api key--"} prompt={"hello gemini ai"} />
+    <main>
+      <ChatBot apiKey={"--gemini api key--"} prompt={"hello gemini ai"} />
     </main>
   )
 }
@@ -95,9 +95,9 @@ export default App;
 | `Header`       | string  | `"ChatOrbit"`      | _No_     | To display your own chatbot Header, pass a value as a string.                                                         |
 | `headerDescription`    | string  | `"Ready to help"`  | _No_     | To display your own header description for the chatbot, pass a value as a string.                                    |
 | `titleOfChatBot` | string  | `"👋 Welcome to ChatOrbit"`             | _No_     | To display your own Title of the chatbot, pass a value as a string.                                            |
-| `DescriptionOfChatbot` | string  | `"Start a conversation by typing a message below"`             | _No_     | To display your own description of the chatbot, pass a value as a string.                                            |
+| `descriptionOfChatbot` | string  | `"Start a conversation by typing a message below"`             | _No_     | To display your own description of the chatbot, pass a value as a string.                                            |
 | `themeColor`          | string  | `"purple"`             | _No_     | To set your own color theme for the chatbot, pass a color name or hex code as a string (e.g., `"red"`, `"#FF5733"`). |
-| `BackGroundImage`      | string  | `"https://img.freepik.com/free-vector/light-grey-dots-background_78370-2583.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`             | _No_     | To set your own background image, pass the image URL or path as a string (e.g., `"https://placehold.co/600x400"`).   |
+| `backGroundImage`      | string  | `"https://img.freepik.com/free-vector/light-grey-dots-background_78370-2583.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`             | _No_     | To set your own background image, pass the image URL or path as a string (e.g., `"https://placehold.co/600x400"`).   |
 
 
 # Setting Up Google Gemini API Key

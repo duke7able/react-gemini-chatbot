@@ -55,10 +55,10 @@ export type ChatProps = {
     textPosition?: "yes" | "no";
     chatOpen?: boolean;
     titleOfChatBot?: string;
-    DescriptionOfChatbot?: string;
+    descriptionOfChatbot?: string;
     headerDescription?: string;
     themeColor?: string;
-    BackGroundImage?: string;
+    backGroundImage?: string;
 };
 
 
@@ -77,13 +77,14 @@ const Chat = ({
     textPosition = "no",
     chatOpen = true,
     titleOfChatBot = "",
-    DescriptionOfChatbot = "",
+    descriptionOfChatbot = "",
     headerDescription = "",
     themeColor = "purple",
-    BackGroundImage = "",
+    backGroundImage = "",
 }: ChatProps) => {
     const [isRecording, setIsRecording] = useState<boolean>(false);
     const [recognition, setRecognition] = useState<any>(null);
+    const inputFile = useRef<HTMLInputElement>(null);
     const [interimTranscript, setInterimTranscript] = useState<string>("");
     const [messageText, setMessageText] = useState<string>("");
     const [attachment, setAttachment] = useState<File | null>(null);
@@ -92,6 +93,12 @@ const Chat = ({
     const messagesListRef = useRef<HTMLDivElement | null>(null);
     const [emojiAnchorEl, setEmojiAnchorEl] = useState<HTMLElement | null>(null);
     const [isChatOpen, setIsChatOpen] = useState<boolean>(chatOpen);
+
+    const handleButtonClick = () => {
+        if (inputFile.current) {
+            inputFile.current.click();
+        }
+    };
 
     const toggleChat = () => {
         setIsChatOpen(!isChatOpen);
@@ -248,7 +255,7 @@ const Chat = ({
                     </IconButton>
                 </ChatHeader>
 
-                <MessagesList ref={messagesListRef} BackGroundImage={BackGroundImage}>
+                <MessagesList ref={messagesListRef} backGroundImage={backGroundImage}>
                     {messages.length === 0 ? (
                         <Box
                             sx={{
@@ -267,7 +274,7 @@ const Chat = ({
                             </Typography>
 
                             <Typography variant="body2">
-                                {DescriptionOfChatbot}
+                                {descriptionOfChatbot}
                             </Typography>
                         </Box>
                     ) : (
@@ -394,12 +401,13 @@ const Chat = ({
                 <InputContainer>
                     <input
                         type="file"
+                        ref={inputFile}
                         id="file-upload"
                         style={{ display: "none" }}
                         onChange={handleFileChange}
                     />
                     <label htmlFor="file-upload">
-                        <ActionButton>
+                        <ActionButton onClick={handleButtonClick}>
                             <AttachFile />
                         </ActionButton>
                     </label>
