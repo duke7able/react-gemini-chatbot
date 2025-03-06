@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.2.5 (2025-03-06)
+
+### Features
+- **LeadForm Feature:**
+  - Added the ability to enable a customizable lead form through the `enableLeadform` flag.
+  - The form can be default with fields such as `Company Name`, `Email`, `Phone Number`, and `Custom Fields` (like dropdowns and text inputs).
+  - You can configure the form position with `enableFormAt` and provide various field options, such as `title`, `placeholder`, `type`, `validationMessage`, and `required` to add your own fields.
+  - Optionally, the form can be linked to an API to submit the collected data using `submitApiEndPoint`, `submitApiAccessToken`, and `submitApiHttpMethod`.
+  - Fields are optional and can be added or removed from the form dynamically based on configuration.
+
+
 ## 1.2.4 (2025-03-05)
 
 ### Fixes

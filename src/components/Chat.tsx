@@ -45,6 +45,8 @@ import {
     ChatTitle,
     StyleImage,
 } from '../utils/chatStyle'
+import  FormComponent, { FormField } from "./FormComponent";
+import { sendApiForm } from "../utils/apiFormBackend";
 
 export type ChatProps = {
     Header: string;
@@ -58,7 +60,18 @@ export type ChatProps = {
     descriptionOfChatbot?: string;
     headerDescription?: string;
     themeColor?: string;
-    backGroundImage?: string;
+    backGroundImage?: string,
+     form?: {
+        enableFormAt?: number;
+            fields?: FormField[];
+            submitApiEndPoint?: string,
+    submitApiAccessToken?: string,
+    submitApiHttpMethod?: 'POST' | 'GET' | 'PUT',
+        };
+    enableLeadForm?: boolean,
+    APIStoreResponseDataEndpoint?: string,
+    APIAccessToken?: string,
+    APIHttpMethod?: 'POST' | 'GET' | 'PUT',
 };
 
 
@@ -81,6 +94,11 @@ const Chat = ({
     headerDescription = "",
     themeColor = "purple",
     backGroundImage = "",
+    form,
+    enableLeadForm,
+    APIStoreResponseDataEndpoint="",
+    APIAccessToken="",
+    APIHttpMethod="POST"
 }: ChatProps) => {
     const [isRecording, setIsRecording] = useState<boolean>(false);
     const [recognition, setRecognition] = useState<any>(null);
@@ -93,6 +111,85 @@ const Chat = ({
     const messagesListRef = useRef<HTMLDivElement | null>(null);
     const [emojiAnchorEl, setEmojiAnchorEl] = useState<HTMLElement | null>(null);
     const [isChatOpen, setIsChatOpen] = useState<boolean>(chatOpen);
+    const [openForm,setOpenForm] = useState(enableLeadForm)
+    const defaultFormConfig = {
+        enableFormAt: 0,
+        fields: [
+            {
+                title: "Name",
+                label: "Your Name",
+                placeholder: "Enter your name",
+                type: "text",
+                validationRegex: "^[a-zA-Z\\s]*$",
+                validationMessage: "Only letters and spaces are allowed",
+                required: true
+            },
+            {
+                title: "email",
+                label: "Email",
+                placeholder: "Enter your Email",
+                type: "text",
+                validationRegex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                validationMessage: "Please enter a valid email address",
+                required: true
+            },
+            {
+                title: "Phone Number",
+                label: "number",
+                placeholder: "Enter your Phone Number",
+                type: "number",
+                validationRegex: "^\\d{10}$",
+                validationMessage: "Please enter a valid phone number",
+                required: false
+            },
+            {
+                title: "Company Name",
+                label: "Company Name",
+                placeholder: "Enter your CompanyName",
+                type: "text",
+                validationRegex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                validationMessage: "Please enter a valid email address",
+                required: false
+            },
+        ]
+    };
+    const formConfig = {
+        enableFormAt: form?.enableFormAt ?? defaultFormConfig.enableFormAt,
+        fields: form?.fields ?? defaultFormConfig.fields
+    };
+    const handleFormSubmit = (formData: any) => {
+        console.log("Form data received in Chat component:", formData);
+        localStorage.setItem("data", formData);
+
+        let apiEndpoint = "";
+        let apiAccessToken = "";
+        let apiHttpMethod = "POST";
+
+        console.log(form?.submitApiEndPoint)
+        if (APIStoreResponseDataEndpoint && APIStoreResponseDataEndpoint !== "") {
+            apiEndpoint = APIStoreResponseDataEndpoint;
+            apiAccessToken = APIAccessToken;
+            apiHttpMethod = APIHttpMethod;
+        } else if (form?.submitApiEndPoint && form?.submitApiEndPoint !== "") {
+            apiEndpoint = form?.submitApiEndPoint;
+            apiAccessToken = form?.submitApiAccessToken || APIAccessToken;
+            apiHttpMethod = form?.submitApiHttpMethod || APIHttpMethod;
+        }
+
+        if (apiEndpoint) {
+            sendApiForm(apiEndpoint, apiAccessToken, formData, apiHttpMethod);
+        } else {
+            console.warn("No API endpoint provided. Skipping form submission.");
+            localStorage.setItem("data", formData);
+        }
+
+        setOpenForm(false);
+    };
+
+
+    const completeExchanges = Math.floor(messages.length / 2);
+    const shouldDisplayForm = completeExchanges === formConfig.enableFormAt;
+
 
     const handleButtonClick = () => {
         if (inputFile.current) {
@@ -149,7 +246,10 @@ const Chat = ({
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
+            console.log('Selected file:', file.name, file.size, file.type);
             setAttachment(file);
+        } else {
+            console.log('No file selected.');
         }
     };
 
@@ -397,7 +497,13 @@ const Chat = ({
                         Recording...
                     </RecordingIndicator>
                 )}
-
+                {shouldDisplayForm && openForm ? (
+                    <FormComponent
+                    form={formConfig}
+                    shouldDisplayForm={shouldDisplayForm}
+                    onSubmit={handleFormSubmit}
+                />
+            ) : (
                 <InputContainer>
                     <input
                         type="file"
@@ -407,9 +513,9 @@ const Chat = ({
                         onChange={handleFileChange}
                     />
                     <label htmlFor="file-upload">
-                        <ActionButton onClick={handleButtonClick}>
-                            <AttachFile />
-                        </ActionButton>
+                    <ActionButton onClick={handleButtonClick}>
+                    <AttachFile />
+                </ActionButton>
                     </label>
 
                     <ActionButton onClick={toggleEmojiPicker}>
@@ -451,6 +557,7 @@ const Chat = ({
                         <Send />
                     </ActionButton>
                 </InputContainer>
+                            )}
 
                 {showEmojiPicker && (
                     <Popper

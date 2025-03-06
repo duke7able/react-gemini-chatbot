@@ -75,7 +75,7 @@ export const MessagesList = styled(Box) <StyledProps>`
   background-image: ${(props) =>
     props.backGroundImage && props.backGroundImage !== ""
       ? `url(${props.backGroundImage})`
-      : `url('./public/backgroundImage.jpg')`}; 
+      : `url('/backGroundImage.jpg')`};
   background-size: cover; 
   background-position: center;
   scroll-behavior: smooth;

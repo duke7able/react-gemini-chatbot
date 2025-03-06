@@ -55,6 +55,8 @@ npm install react-gemini-chatbot
 yarn add react-gemini-chatbot
 ```
 
+*Note:* This might take longer it would be optimised in upcoming builds
+
 ## Prerequisites
 
 - React 16.8+ (Hooks support)
@@ -121,6 +123,9 @@ Make sure you have the required dependencies installed in your project.
 | `APIStoreResponseDataEndpoint`      | string  | `""`             | _No_     | Add your endpoint url of backend to store every converstion of chatbot in database(eg, https://localhost:5173/route).   |
 | `APIAccessToken`      | string  | `""`             | _No_     | In your endpoint url of backend is there any authorization then you can share your bearertoken.   |
 | `APIHttpMethod`                           | string     | `"POST"`          | No           | Configure the HTTP method to use for the API request. Options: `"POST"`, `"PUT"`, or `"GET"`. The default method is `"POST"`. |
+| `enableLeadform`      | boolean     | `"false"`          | No           | Set to `true` to enable the LeadForm so users can fill it. If `false`, the form is disabled. |
+| `leadForm`             | JSON        | `{}`               | No           | The configuration object for the lead form fields. You can customize this object to add/remove fields and define their properties. If not provided, default fields (name, email, phone number, and company name) will be used. |
+
 
 # Backend Api To Store Data
 
@@ -133,6 +138,71 @@ Make sure you have the required dependencies installed in your project.
     - `"PUT"`: Sends the data as JSON in the request body.
     - `"GET"`: Sends the data as query parameters in the URL.
 
+# LeadForm Feature
+
+The LeadForm feature allows you to create a customizable form that can be displayed on your website. The form can include various fields, and you can configure it to submit data to a specified API endpoint.
+
+## Configuration Options
+
+### 1. `enableLeadform`
+- **Type:** `boolean`
+- **Default Value:** `"false"`
+- **Required:** No
+- **Description:**
+  - Set this to `true` to enable the LeadForm so users can fill it out.
+  - Set this to `false` to disable the form.
+
+### 2. `leadForm`
+- **Type:** `JSON`
+- **Required:** No
+- **Description:**
+  - The `leadForm` object contains the fields and configurations for the form.
+  - If you do not provide any `leadForm`, the form will default to the name, email, phone number, and company name fields.
+  - You can customize the form by adding or removing fields in the `fields` array.
+
+### JSON Structure for `leadForm`
+
+```
+const leadForm = {
+  "enableFormAt": 0, // optional
+  "fields": [ // optional
+    {
+      "title": "Company Name",
+      "placeholder": "Enter your Company Name",
+      "type": "text",
+      "validationMessage": "Please enter a valid company name",
+      "required": false
+    },
+    {
+      "title": "Country of Operation",
+      "placeholder": "Select your Country",
+      "type": "dropdown",
+      "inputOptions": ["USA", "Canada", "UK", "Australia", "India"],
+      "validationMessage": "Please select a country",
+      "required": false
+    },
+    {
+      "title": "Select Gender",
+      "placeholder": "",
+      "type": "radio",
+      "inputOptions": ["Male", "Female", "other"],
+      "validationMessage": "Please select your gender",
+      "required": true
+    },
+    {
+      "title": "Select your interest",
+      "placeholder": "",
+      "type": "checkbox",
+      "inputOptions": ["Coding", "music","travel", "other"],
+      "validationMessage": "Please select your gender",
+      "required": true
+    },
+  ],
+  "submitApiEndPoint": "http://localhost:3000/data", // optional
+  "submitApiAccessToken": "njenjkfje", // optional
+  "submitApiHttpMethod": "PUT" // optional
+};
+```
 
 ## Features in Detail
 
@@ -144,7 +214,7 @@ The chatbot integrates speech recognition for voice-to-text input:
 - Speak your message
 - Click the microphone icon again to stop recording
 
-### ⚠️File Attachments
+### ⚠️ File Attachments
 
 Users can attach files to their messages:
 

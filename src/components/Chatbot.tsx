@@ -4,6 +4,7 @@ import { sendMessageToGemini } from '../utils/apiRes'
 import { FileType } from './File'
 import Chat from './Chat'
 import React from 'react'
+import { FormField } from "./FormComponent"
 
 type ChatbotProps = {
     apiKey: string,
@@ -23,7 +24,15 @@ type ChatbotProps = {
     backGroundImage?: string,
     APIStoreResponseDataEndpoint?: string,
     APIAccessToken?: string,
-    APIHttpMethod?: "POST" | "GET" | "PUT";
+    APIHttpMethod?: 'POST' | 'GET' | 'PUT',
+    leadForm?: {
+        enableFormAt?: number;
+        fields?: FormField[];
+        submitApiEndPoint?: string,
+        submitApiAccessToken?: string,
+        submitApiHttpMethod?: 'POST' | 'GET' | 'PUT',
+        };
+    enableLeadForm?: boolean,
 }
 
 export type UserMessage = {
@@ -55,7 +64,9 @@ function Chatbot(
         backGroundImage = "",
         APIStoreResponseDataEndpoint="",
         APIAccessToken="",
-        APIHttpMethod="POST"
+        APIHttpMethod="POST",
+        leadForm,
+        enableLeadForm,
     }: ChatbotProps
 ) {
 
@@ -68,10 +79,6 @@ function Chatbot(
         messageText: string,
         attachment: File | null
     ) => {
-        const currentTime = new Date().toLocaleDateString([], {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
 
         let userMessage: UserMessage;
         if (attachment) {
@@ -82,14 +89,14 @@ function Chatbot(
                 fileType: attachment.type as FileType,
                 fileUrl: URL.createObjectURL(attachment),
                 text: messageText,
-                timestamp: currentTime,
+                timestamp: new Date().toLocaleString(),
             };
         } else {
             userMessage = {
                 isUser: true,
                 type: "text",
                 text: messageText,
-                timestamp: currentTime
+                timestamp: new Date().toLocaleString(),
             }
         }
 
@@ -120,7 +127,7 @@ function Chatbot(
                 apiMaxOutputTokens,
                 APIStoreResponseDataEndpoint,
                 APIAccessToken,
-                APIHttpMethod
+                APIHttpMethod,
             });
 
             console.log(botResponse.candidates[0].content.parts[0].text);
@@ -131,24 +138,18 @@ function Chatbot(
                     isUser: false,
                     type: 'text',
                     text: botResponse.candidates[0].content.parts[0].text,
-                    timestamp: new Date().toLocaleDateString([], {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    })
+                    timestamp: new Date().toLocaleString(),
                 }
             ]);
-        } catch (err) {
+        } catch (err: any) {
             console.log(err);
             setMessages([
                 ...updatedMessages,
                 {
                     isUser: false,
                     type: 'text',
-                    text: 'Sorry, something went wrong. Please try again.',
-                    timestamp: new Date().toLocaleDateString([], {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    })
+                    text: `Sorry, something went wrong. Please try again.  Error: ${err.message || 'Unknown error'}`,
+                    timestamp:new Date().toLocaleString(),
                 }
             ]);
         } finally {
@@ -198,7 +199,14 @@ function Chatbot(
                 descriptionOfChatbot={descriptionOfChatbot}
                 headerDescription={headerDescription}
                 themeColor={themeColor}
-                backGroundImage={backGroundImage} Header={Header} />
+                backGroundImage={backGroundImage}
+                Header={Header}
+                form={leadForm}
+                enableLeadForm={enableLeadForm}
+                APIStoreResponseDataEndpoint={APIStoreResponseDataEndpoint}
+                APIAccessToken={APIAccessToken}
+                APIHttpMethod={APIHttpMethod}
+                />
         </Container>
     )
 }
