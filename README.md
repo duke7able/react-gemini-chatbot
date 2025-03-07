@@ -55,7 +55,7 @@ npm install react-gemini-chatbot
 yarn add react-gemini-chatbot
 ```
 
-*Note:* This might take longer it would be optimised in upcoming builds
+*Note:* This might take longer it would be optimised in upcoming builds 
 
 ## Prerequisites
 
@@ -148,14 +148,14 @@ The LeadForm feature allows you to create a customizable form that can be displa
 - **Type:** `boolean`
 - **Default Value:** `"false"`
 - **Required:** No
-- **Description:**
+- **Description:** 
   - Set this to `true` to enable the LeadForm so users can fill it out.
   - Set this to `false` to disable the form.
 
 ### 2. `leadForm`
 - **Type:** `JSON`
 - **Required:** No
-- **Description:**
+- **Description:** 
   - The `leadForm` object contains the fields and configurations for the form.
   - If you do not provide any `leadForm`, the form will default to the name, email, phone number, and company name fields.
   - You can customize the form by adding or removing fields in the `fields` array.
@@ -164,7 +164,7 @@ The LeadForm feature allows you to create a customizable form that can be displa
 
 ```
 const leadForm = {
-  "enableFormAt": 0, // optional
+  "enableFormAt": 3, // optional 
   "fields": [ // optional
     {
       "title": "Company Name",
@@ -198,7 +198,7 @@ const leadForm = {
       "required": true
     },
   ],
-  "submitApiEndPoint": "http://localhost:3000/data", // optional
+  "submitApiEndPoint": "http://localhost:3000/data",// optional
   "submitApiAccessToken": "njenjkfje", // optional
   "submitApiHttpMethod": "PUT" // optional
 };

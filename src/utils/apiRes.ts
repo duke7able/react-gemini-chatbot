@@ -1,107 +1,105 @@
 import { UserMessage } from "../components/Chatbot";
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from "uuid";
 import { ApiResponsePayload, sendApiResponse } from "./apiBackend";
 
-
 export type SendMessageToGeminiParams = {
-    apiKey: string,
-    modelName: string,
-    systemPrompt: string,
-    userMessage: string,
-    previousMessages: UserMessage[],
-    fileContent: string | ArrayBuffer | null,
-    fileName: string | null,
-    temperature: number,
-    useContext: boolean,
-    apiMaxOutputTokens: number,
-    APIStoreResponseDataEndpoint: string,
-    APIAccessToken: string,
-    APIHttpMethod?: "POST" | "GET" | "PUT"
-}
+  apiKey: string;
+  modelName: string;
+  systemPrompt: string;
+  userMessage: string;
+  previousMessages: UserMessage[];
+  fileContent: string | ArrayBuffer | null;
+  fileName: string | null;
+  temperature: number;
+  useContext: boolean;
+  apiMaxOutputTokens: number;
+  APIStoreResponseDataEndpoint: string;
+  APIAccessToken: string;
+  APIHttpMethod?: "POST" | "GET" | "PUT";
+};
 
 interface GeminiApiResponse {
-    candidates: {
+  candidates: {
+    text: string;
+    content: {
+      parts: {
         text: string;
-        content: {
-            parts: {
-                text: string;
-            }[];
-        };
-    }[];
+      }[];
+    };
+  }[];
 }
 
+export async function sendMessageToGemini({
+  apiKey,
+  modelName,
+  systemPrompt,
+  userMessage,
+  previousMessages,
+  fileContent = null,
+  fileName = null,
+  temperature,
+  useContext,
+  apiMaxOutputTokens,
+  APIStoreResponseDataEndpoint,
+  APIAccessToken,
+  APIHttpMethod,
+}: SendMessageToGeminiParams) {
+  const apiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent`;
 
-export async function sendMessageToGemini(
-    {
-        apiKey,
-        modelName,
-        systemPrompt,
-        userMessage,
-        previousMessages,
-        fileContent = null,
-        fileName = null,
-        temperature,
-        useContext,
-        apiMaxOutputTokens,
-        APIStoreResponseDataEndpoint,
-        APIAccessToken,
-        APIHttpMethod
-    }: SendMessageToGeminiParams
-) {
-    const apiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent`;
+  const formattedMessages = [];
 
-    const formattedMessages = [];
+  let userMessageText = userMessage;
+  if (fileContent) {
+    userMessageText += `\n\nFile Content (${fileName}): ${fileContent}`;
+  }
 
-    let userMessageText = userMessage;
-    if (fileContent) {
-        userMessageText += `\n\nFile Content (${fileName}): ${fileContent}`
+  formattedMessages.push({
+    role: "model",
+    parts: [{ text: systemPrompt }],
+  });
+  formattedMessages.push({
+    role: "user",
+    parts: [{ text: userMessageText }],
+  });
+
+  if (useContext) {
+    for (let i = 0; i < previousMessages.length; i++) {
+      const msg = previousMessages[i];
+      if (msg.type === "text") {
+        formattedMessages.push({
+          role: msg.isUser ? "user" : "model",
+          parts: [{ text: msg.text }],
+        });
+      }
     }
+  }
 
-    formattedMessages.push({
-        role: 'model',
-        parts: [{ text: systemPrompt }]
-    });
-    formattedMessages.push({
-        role: 'user',
-        parts: [{ text: userMessageText }]
-    });
+  const requestBody = {
+    contents: formattedMessages,
+    generationConfig: {
+      temperature: temperature,
+      maxOutputTokens: apiMaxOutputTokens,
+    },
+  };
 
-    if (useContext) {
-        for (let i = 0; i < previousMessages.length; i++) {
-            const msg = previousMessages[i];
-            if (msg.type === 'text') {
-                formattedMessages.push({
-                    role: msg.isUser ? 'user' : 'model',
-                    parts: [{ text: msg.text }]
-                });
-            }
-        }
-    }
+  const response = await fetch(`${apiUrl}?key=${apiKey}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  });
 
-    const requestBody = {
-        contents: formattedMessages,
-        generationConfig: {
-            temperature: temperature,
-            maxOutputTokens: apiMaxOutputTokens
-        }
-    }
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(
+      errorData.error?.message || "Failed to get response from Gemini"
+    );
+  }
 
-    const response = await fetch(`${apiUrl}?key=${apiKey}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody)
-    });
+  const data: GeminiApiResponse = await response.json();
 
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'Failed to get response from Gemini');
-    }
-
-    const data: GeminiApiResponse = await response.json();
-    
-    let uuid = localStorage.getItem("userUUID");
+  let uuid = localStorage.getItem("userUUID");
   if (!uuid) {
     uuid = uuidv4();
     localStorage.setItem("userUUID", uuid);
@@ -114,21 +112,25 @@ export async function sendMessageToGemini(
       modelMessage: data.candidates[0].content.parts[0].text,
     };
 
-    await sendApiResponse(
+    try {
+      await sendApiResponse(
         APIStoreResponseDataEndpoint,
-      APIAccessToken,
-      apiPayload,
-      APIHttpMethod || "POST"
-    );
-  }
-    if (
-        data.candidates &&
-        data.candidates[0] &&
-        data.candidates[0].content &&
-        data.candidates[0].content.parts
-    ) {
-        return data
-    } else {
-        throw new Error('Unexpected response format from Gemini API');
+        APIAccessToken,
+        apiPayload,
+        APIHttpMethod || "POST"
+      );
+    } catch (error) {
+      console.error("Failed to store response data:", error);
     }
+  }
+  if (
+    data.candidates &&
+    data.candidates[0] &&
+    data.candidates[0].content &&
+    data.candidates[0].content.parts
+  ) {
+    return data;
+  } else {
+    throw new Error("Unexpected response format from Gemini API");
+  }
 }
