@@ -33,6 +33,7 @@ type ChatbotProps = {
     submitApiHttpMethod?: "POST" | "GET" | "PUT";
   };
   enableLeadForm?: boolean;
+  approach?: Array<{agent : string ; user : string}>;
 };
 
 export type UserMessage = {
@@ -66,6 +67,7 @@ function ChatBot({
   APIHttpMethod = "POST",
   leadForm,
   enableLeadForm,
+  approach,
 }: ChatbotProps) {
   // all states
   const [messages, setMessages] = useState<UserMessage[] | []>([]);
@@ -125,6 +127,7 @@ function ChatBot({
         APIStoreResponseDataEndpoint,
         APIAccessToken,
         APIHttpMethod,
+        approach
       });
 
       console.log(botResponse.candidates[0].content.parts[0].text);

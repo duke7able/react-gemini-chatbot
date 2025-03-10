@@ -16,6 +16,7 @@ export type SendMessageToGeminiParams = {
   APIStoreResponseDataEndpoint: string;
   APIAccessToken: string;
   APIHttpMethod?: "POST" | "GET" | "PUT";
+  approach?: Array<{agent : string ; user : string}>;
 };
 
 interface GeminiApiResponse {
@@ -28,7 +29,10 @@ interface GeminiApiResponse {
     };
   }[];
 }
-
+interface Message {
+  role: "model" | "user";
+  parts: { text: string }[];
+}
 export async function sendMessageToGemini({
   apiKey,
   modelName,
@@ -43,11 +47,23 @@ export async function sendMessageToGemini({
   APIStoreResponseDataEndpoint,
   APIAccessToken,
   APIHttpMethod,
+  approach
 }: SendMessageToGeminiParams) {
   const apiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent`;
-
-  const formattedMessages = [];
-
+  
+  let formattedMessages: Message[] = [];
+  if (approach) {
+    approach.forEach(pair => {
+      formattedMessages.push({
+        role: "user",
+        parts: [{ text: pair.user }],
+      });
+      formattedMessages.push({
+        role: "model",
+        parts: [{ text: pair.agent }],
+      });
+    });
+  }
   let userMessageText = userMessage;
   if (fileContent) {
     userMessageText += `\n\nFile Content (${fileName}): ${fileContent}`;

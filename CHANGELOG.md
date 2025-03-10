@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.3 (2025-03-10)
+
+### Feature
+
+- Introduced the **Approach** feature, which allows users to set a **zero-shot** approach for the chatbot or language model
+- Added support for **one-shot** or **few-shot** approaches,You can define a Array of json object like this [{user : "text",agent:"text"}].
+
 ## 1.3.2 (2025-03-10)
 
 ### Fix

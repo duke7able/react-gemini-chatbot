@@ -125,6 +125,7 @@ Make sure you have the required dependencies installed in your project.
 | `APIHttpMethod`                           | string     | `"POST"`          | No           | Configure the HTTP method to use for the API request. Options: `"POST"`, `"PUT"`, or `"GET"`. The default method is `"POST"`. |
 | `enableLeadform`      | boolean     | `"false"`          | No           | Set to `true` to enable the LeadForm so users can fill it. If `false`, the form is disabled. |
 | `leadForm`             | JSON        | `{}`               | No           | The configuration object for the lead form fields. You can customize this object to add/remove fields and define their properties. If not provided, default fields (name, email, phone number, and company name) will be used. |
+| `approach`             | Array        | `[]`               | No           | The `approach` array is used to prime the Large Language Model (LLM) or Chatbot with a specific conversation style, persona, or expected dialogue flow. Each object in the array represents a single turn in a conversation, defining what the `user` would say and the corresponding, desired response from the `agent` (the LLM/Chatbot).|
 
 
 # Backend Api To Store Data
@@ -202,6 +203,31 @@ const leadForm = {
   "submitApiAccessToken": "njenjkfje", // optional
   "submitApiHttpMethod": "PUT" // optional
 };
+```
+
+# Approach Feature
+
+The `approach` feature allows users to set a **zero-shot** approach for the chatbot or language model. In this case, the model is primed with a set of example interactions, enabling it to generate responses based on the patterns in the examples, even when no additional context is provided. However, for some use cases, a **one-shot** or **few-shot** approach might produce output that is more closely aligned with user expectations, especially when more detailed context or instruction is required.
+
+For more details, refer to the [Gemini API Documentation](https://ai.google.dev/gemini-api/docs/text-generation?lang=python).
+
+**Approach Array of JSON Example:**
+
+```
+const approach = [
+    {
+      user: "Do you have any listings for homes with a pool?",
+      agent: "Yes, we have several homes with swimming pools available! Could you please let me know your preferred location and budget? I'd be happy to share some options with you."
+    },
+    {
+      user: "How do I know if I can get approved for a mortgage?",
+      agent: "Great question! Mortgage approval usually depends on factors like your credit score, income, debt-to-income ratio, and the size of your down payment. I can connect you with a mortgage lender who can give you a clear idea of your loan eligibility. Would you like me to do that?"
+    },
+    {
+      user: "Can you help me find a property for investment purposes?",
+      agent: "Certainly! Investment properties can generate great returns if chosen wisely. Are you looking for residential or commercial properties? Also, do you have a target location or budget in mind?"
+    }
+  ];
 ```
 
 ## Features in Detail
