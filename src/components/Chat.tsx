@@ -49,7 +49,7 @@ import FormComponent, { FormField } from "./FormComponent";
 import { sendApiForm } from "../utils/apiFormBackend";
 
 export type ChatProps = {
-  Header: string;
+  header: string;
   messages: UserMessage[];
   handleMessageBeingSent: (
     messageText: string,
@@ -87,7 +87,7 @@ const Chat = ({
   messages,
   handleMessageBeingSent,
   isLoading = false,
-  Header,
+  header,
   imageUrl,
   textPosition = false,
   chatOpen = true,
@@ -348,7 +348,7 @@ const Chat = ({
             </StyleImage>
             <Box>
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                {Header}
+                {header}
               </Typography>
               <Typography variant="caption" sx={{ opacity: 0.8 }}>
                 {isLoading ? "Thinking..." : headerDescription}
@@ -388,7 +388,7 @@ const Chat = ({
                   <Typography variant="body1" sx={{ mb: 2 }}>
                     {titleOfChatBot !== ""
                       ? titleOfChatBot
-                      : `👋 Welcome to ${Header}`}
+                      : `👋 Welcome to ${header}`}
                   </Typography>
 
                   <Typography variant="body2">

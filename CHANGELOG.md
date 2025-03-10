@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.4 (2025-03-10)
+
+### Feature
+
+- Introduced the **goodFormatting** feature which adds instructions for well-structured, readable responses with appropriate formatting by passing true value.
+- Introduced the **tone** If specified, instructs the model to respond in the requested tone and default formal tone is used.
+- Introduced the **useEmoji** feature which adds emoji in response by passing true.
+
 ## 1.3.3 (2025-03-10)
 
 ### Feature

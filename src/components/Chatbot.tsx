@@ -10,7 +10,7 @@ type ChatbotProps = {
   apiKey: string;
   prompt: string;
   model?: string;
-  Header?: string;
+  header?: string;
   temperature?: number;
   useContext?: boolean;
   apiMaxOutputTokens?: number;
@@ -33,7 +33,10 @@ type ChatbotProps = {
     submitApiHttpMethod?: "POST" | "GET" | "PUT";
   };
   enableLeadForm?: boolean;
-  approach?: Array<{agent : string ; user : string}>;
+  approach?: Array<{ agent: string; user: string }>;
+  goodFormatting?: boolean;
+  tone?: string;
+  useEmoji?: boolean;
 };
 
 export type UserMessage = {
@@ -50,7 +53,7 @@ function ChatBot({
   apiKey,
   prompt,
   model = "gemini-2.0-flash",
-  Header = "ChatOrbit",
+  header = "ChatOrbit",
   temperature = 0.7,
   useContext = false,
   apiMaxOutputTokens = 2048,
@@ -68,6 +71,9 @@ function ChatBot({
   leadForm,
   enableLeadForm,
   approach,
+  goodFormatting,
+  tone,
+  useEmoji,
 }: ChatbotProps) {
   // all states
   const [messages, setMessages] = useState<UserMessage[] | []>([]);
@@ -127,7 +133,10 @@ function ChatBot({
         APIStoreResponseDataEndpoint,
         APIAccessToken,
         APIHttpMethod,
-        approach
+        approach,
+        goodFormatting,
+        tone,
+        useEmoji,
       });
 
       console.log(botResponse.candidates[0].content.parts[0].text);
@@ -180,15 +189,26 @@ function ChatBot({
 
   return (
     <Container
-      maxWidth={false}
       sx={{
         display: "flex",
+        position: "fixed",
         justifyContent: "flex-end",
         alignItems: "flex-start",
-        height: "100vh",
-        padding: 3,
         margin: 0,
         width: "100%",
+        height: "auto",
+        bottom: 0,
+        right: 0,
+        padding: {
+          xs: 1,
+          sm: 3, // For larger screens
+        },
+        // Optional: Adjust maxWidth for small screens
+        "@media (max-width: 375px)": {
+          width: "100%",
+          bottom: 0,
+          padding: 2,
+        },
       }}
     >
       <Chat
@@ -203,7 +223,7 @@ function ChatBot({
         headerDescription={headerDescription}
         themeColor={themeColor}
         backGroundImage={backGroundImage}
-        Header={Header}
+        header={header}
         form={leadForm}
         enableLeadForm={enableLeadForm}
         APIStoreResponseDataEndpoint={APIStoreResponseDataEndpoint}

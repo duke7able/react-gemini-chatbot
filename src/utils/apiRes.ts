@@ -17,6 +17,9 @@ export type SendMessageToGeminiParams = {
   APIAccessToken: string;
   APIHttpMethod?: "POST" | "GET" | "PUT";
   approach?: Array<{agent : string ; user : string}>;
+  goodFormatting?: boolean;
+  tone?: string;
+  useEmoji?: boolean;
 };
 
 interface GeminiApiResponse {
@@ -47,9 +50,22 @@ export async function sendMessageToGemini({
   APIStoreResponseDataEndpoint,
   APIAccessToken,
   APIHttpMethod,
-  approach
+  approach,
+  goodFormatting,
+  tone,
+  useEmoji,
 }: SendMessageToGeminiParams) {
   const apiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent`;
+    // adding prompt
+    let enhancedSystemPrompt = "";
+    if (goodFormatting) {
+      enhancedSystemPrompt += "Please format your responses with clear structure, using paragraphs, bullet points, and headings when appropriate to make the content easily readable and well-organized. Use proper spacing, line breaks etc to make it more readable. Try to make it concise and to the point if possible.\n\n";
+    }
+    enhancedSystemPrompt += `Please respond in a ${tone} tone of voice.\n\n`;
+    if (useEmoji) {
+      enhancedSystemPrompt += "Please include appropriate emojis in your responses to make them more engaging😊🎉.\n\n";
+    }
+    let finalSystemPrompt = enhancedSystemPrompt + (systemPrompt || "");
   
   let formattedMessages: Message[] = [];
   if (approach) {
@@ -71,7 +87,7 @@ export async function sendMessageToGemini({
 
   formattedMessages.push({
     role: "model",
-    parts: [{ text: systemPrompt }],
+    parts: [{ text: finalSystemPrompt }],
   });
   formattedMessages.push({
     role: "user",

@@ -102,30 +102,32 @@ Make sure you have the required dependencies installed in your project.
 
 ## Props
 
-| Prop                   | Type    | Default            | Required | Description                                                                                                          |
+| Prop | Type | Default | Required | Description |
 | ---------------------- | ------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
-| `apiKey`               | string  | `""`               | _Yes_    | Your Google Gemini API key.                                                                                          |
-| `prompt`               | string  | `""`               | _Yes_    | System prompt to define the chatbot's behavior.                                                                      |
-| `model`                | string  | `gemini-1.5-flash` | _No_     | Gemini model to use (e.g., "gemini-1.5-flash").                                                                      |
-| `TitleOfChatBot`       | string  | `"ChatBot"`        | _No_     | Display name for the chatbot.                                                                                        |
-| `temperature`          | number  | `0.7`              | _No_     | Controls the randomness of the responses (0.0-1.0).                                                                  |
-| `useContext`           | boolean | `false`            | _No_     | Whether to maintain conversation context.                                                                            |
-| `apiMaxOutputTokens`   | number  | `2048`             | _No_     | Maximum tokens allowed in the API response.                                                                          |
-| `chatOpen`             | boolean | `true`             | _No_     | Controls the visibility of the chat window (open or closed).                                                         |
-| `imageUrl`             | string  | `"https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`  | _No_     | URL for the chatbot's avatar image.                                                                                  |
-| `textPosition`         | string  | `false`             | _No_     | By default, the user’s text is displayed on the right side. To change the alignment of the user's text to the left side and ai response to right, pass true     |
-| `Header`       | string  | `"ChatOrbit"`      | _No_     | To display your own chatbot Header, pass a value as a string.                                                         |
-| `headerDescription`    | string  | `"Ready to help"`  | _No_     | To display your own header description for the chatbot, pass a value as a string.                                    |
-| `titleOfChatBot` | string  | `"👋 Welcome to ChatOrbit"`             | _No_     | To display your own Title of the chatbot, pass a value as a string.                                            |
-| `descriptionOfChatbot` | string  | `"Start a conversation by typing a message below"`             | _No_     | To display your own description of the chatbot, pass a value as a string.                                            |
-| `themeColor`          | string  | `"purple"`             | _No_     | To set your own color theme for the chatbot, pass a color name or hex code as a string (e.g., `"red"`, `"#FF5733"`). |
-| `backGroundImage`      | string  | `"https://img.freepik.com/free-vector/light-grey-dots-background_78370-2583.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"`             | _No_     | To set your own background image, pass the image URL or path as a string (e.g., `"https://placehold.co/600x400"`).   |
-| `APIStoreResponseDataEndpoint`      | string  | `""`             | _No_     | Add your endpoint url of backend to store every converstion of chatbot in database(eg, https://localhost:5173/route).   |
-| `APIAccessToken`      | string  | `""`             | _No_     | In your endpoint url of backend is there any authorization then you can share your bearertoken.   |
-| `APIHttpMethod`                           | string     | `"POST"`          | No           | Configure the HTTP method to use for the API request. Options: `"POST"`, `"PUT"`, or `"GET"`. The default method is `"POST"`. |
-| `enableLeadform`      | boolean     | `"false"`          | No           | Set to `true` to enable the LeadForm so users can fill it. If `false`, the form is disabled. |
-| `leadForm`             | JSON        | `{}`               | No           | The configuration object for the lead form fields. You can customize this object to add/remove fields and define their properties. If not provided, default fields (name, email, phone number, and company name) will be used. |
-| `approach`             | Array        | `[]`               | No           | The `approach` array is used to prime the Large Language Model (LLM) or Chatbot with a specific conversation style, persona, or expected dialogue flow. Each object in the array represents a single turn in a conversation, defining what the `user` would say and the corresponding, desired response from the `agent` (the LLM/Chatbot).|
+| `APIHttpMethod` | string | `"POST"` | _No_ | Configure the HTTP method to use for the API request. Options: `"POST"`, `"PUT"`, or `"GET"`. The default method is `"POST"`. |
+| `APIStoreResponseDataEndpoint` | string | `""` | _No_ | Add your endpoint url of backend to store every conversation of chatbot in database (e.g., https://localhost:5173/route). |
+| `APIAccessToken` | string | `""` | _No_ | In your endpoint URL of backend, if there is any authorization, you can share your bearer token. |
+| `apiMaxOutputTokens` | number | `2048` | _No_ | Maximum tokens allowed in the API response. |
+| `apiKey` | string | `""` | _Yes_ | Your Google Gemini API key. |
+| `approach` | Array | `[]` | _No_ | The `approach` array is used to prime the Large Language Model (LLM) or Chatbot with a specific conversation style, persona, or expected dialogue flow. Each object in the array represents a single turn in a conversation, defining what the `user` would say and the corresponding, desired response from the `agent` (the LLM/Chatbot). |
+| `backGroundImage` | string | `"https://img.freepik.com/free-vector/light-grey-dots-background_78370-2583.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"` | _No_ | To set your own background image, pass the image URL or path as a string (e.g., `"https://placehold.co/600x400"`). |
+| `chatOpen` | boolean | `true` | _No_ | Controls the visibility of the chat window (open or closed). |
+| `descriptionOfChatbot` | string | `"Start a conversation by typing a message below"` | _No_ | To display your own description of the chatbot, pass a value as a string. |
+| `enableLeadform` | boolean | `"false"` | _No_ | Set to `true` to enable the LeadForm so users can fill it. If `false`, the form is disabled. |
+| `goodFormatting` | boolean | `true` | _No_ | `goodFormatting` set to true, adds instructions for well-structured, readable responses with appropriate formatting. |
+| `header` | string | `"ChatOrbit"` | _No_ | To display your own chatbot header, pass a value as a string. |
+| `headerDescription` | string | `"Ready to help"` | _No_ | To display your own header description for the chatbot, pass a value as a string. |
+| `imageUrl` | string | `"https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"` | _No_ | URL for the chatbot's avatar image. |
+| `leadForm` | JSON | `{}` | _No_ | The configuration object for the lead form fields. You can customize this object to add/remove fields and define their properties. If not provided, default fields (name, email, phone number, and company name) will be used. |
+| `model` | string | `gemini-1.5-flash` | _No_ | Gemini model to use (e.g., "gemini-1.5-flash"). |
+| `prompt` | string | `""` | _Yes_ | System prompt to define the chatbot's behavior. |
+| `temperature` | number | `0.7` | _No_ | Controls the randomness of the responses (0.0-1.0). |
+| `textPosition` | string | `false` | _No_ | By default, the user’s text is displayed on the right side. To change the alignment of the user's text to the left side and AI response to the right, pass true. |
+| `titleOfChatBot` | string | `"👋 Welcome to ChatOrbit"` | _No_ | To display your own Title of the chatbot, pass a value as a string. |
+| `themeColor` | string | `"purple"` | _No_ | To set your own color theme for the chatbot, pass a color name or hex code as a string (e.g., `"red"`, `"#FF5733"`). |
+| `tone` | string | `"formal"` | _No_ | If specified, instructs the model to respond in the requested tone. |
+| `useContext` | boolean | `false` | _No_ | Whether to maintain conversation context. |
+| `useEmoji` | boolean | `false` | _No_ | When set to true, instructs the model to include appropriate emojis in responses. |
 
 
 # Backend Api To Store Data
