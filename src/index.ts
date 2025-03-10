@@ -1,1 +1,1 @@
-export { Chatbot } from "./components/Chatbot";
+export { ChatBot } from "./components/ChatBot";

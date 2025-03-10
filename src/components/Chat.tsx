@@ -22,7 +22,7 @@ import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import Markdown from "react-markdown";
 import { FilePreview } from "./File";
 import React from "react";
-import { UserMessage } from "./Chatbot";
+import { UserMessage } from "./ChatBot";
 
 import {
   ChatContainer,

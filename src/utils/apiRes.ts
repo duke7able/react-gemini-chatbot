@@ -1,4 +1,4 @@
-import { UserMessage } from "../components/Chatbot";
+import { UserMessage } from "../components/ChatBot";
 import { v4 as uuidv4 } from "uuid";
 import { ApiResponsePayload, sendApiResponse } from "./apiBackend";
 

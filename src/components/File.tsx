@@ -19,7 +19,7 @@ import {
     DownloadButton,
 } from '../utils/fileStyle';
 import React from "react";
-import { UserMessage } from "./Chatbot";
+import { UserMessage } from "./ChatBot";
 
 // **File Type Definition**
 export type FileType = "pdf" | "doc" | "docx" | "xls" | "xlsx" | "csv" | "jpg" | "jpeg" | "png" | "zip" | "default";

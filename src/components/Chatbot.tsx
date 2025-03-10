@@ -45,7 +45,7 @@ export type UserMessage = {
   timestamp: string;
 };
 
-function Chatbot({
+function ChatBot({
   apiKey,
   prompt,
   model = "gemini-2.0-flash",
@@ -211,4 +211,4 @@ function Chatbot({
   );
 }
 
-export { Chatbot };
+export { ChatBot };
