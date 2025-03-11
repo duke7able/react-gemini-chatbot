@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.6 (2025-03-11)
+
+### Feature
+
+- Added customizable `chatBotHeight` and `chatBotWidth` props to control the chatbot's dimensions of height and width.
+- Added customizable `leadFormHeader`, `leadFormDescription`, and `leadFormButtonText` props for dynamic form text of leadForm.
+
+## 1.3.5 (2025-03-11)
+
+### Feature
+
+- Add a demo video of lead form in Readme.md file.
+
+### Fix
+
+- For Approach Feature update link of Gemini text generation docs.
+
 ## 1.3.4 (2025-03-10)
 
 ### Feature

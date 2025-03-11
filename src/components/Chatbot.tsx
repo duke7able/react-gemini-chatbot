@@ -37,6 +37,11 @@ type ChatbotProps = {
   goodFormatting?: boolean;
   tone?: string;
   useEmoji?: boolean;
+  chatBotHeight?:string;
+  chatBotWeight?:string;
+  leadFormHeader?:string;
+  leadFormDescription?:string;
+  leadFormButtonText?:string;
 };
 
 export type UserMessage = {
@@ -74,6 +79,11 @@ function ChatBot({
   goodFormatting,
   tone,
   useEmoji,
+  chatBotHeight,
+  chatBotWeight,
+  leadFormHeader,
+  leadFormDescription,
+  leadFormButtonText
 }: ChatbotProps) {
   // all states
   const [messages, setMessages] = useState<UserMessage[] | []>([]);
@@ -195,8 +205,6 @@ function ChatBot({
         justifyContent: "flex-end",
         alignItems: "flex-start",
         margin: 0,
-        width: "100%",
-        height: "auto",
         bottom: 0,
         right: 0,
         padding: {
@@ -229,6 +237,11 @@ function ChatBot({
         APIStoreResponseDataEndpoint={APIStoreResponseDataEndpoint}
         APIAccessToken={APIAccessToken}
         APIHttpMethod={APIHttpMethod}
+        chatBotHeight={chatBotHeight}
+        chatBotWeight={chatBotWeight}
+        leadFormHeader={leadFormHeader}
+        leadFormDescription={leadFormDescription}
+        leadFormButtonText={leadFormButtonText}
       />
     </Container>
   );

@@ -7,8 +7,6 @@ import {
   Typography,
   Avatar,
   Paper,
-  Popper,
-  CircularProgress,
 } from "@mui/material";
 
 
@@ -19,6 +17,8 @@ interface StyledProps {
   textPosition?: boolean;
   backGroundImage?: string;
   open?: boolean;
+  chatBotWeight?: string | number;
+  chatBotHeight?: string | number;
 }
 
 // Styled Components with TypeScript
@@ -33,9 +33,8 @@ export const slideIn = keyframes`
 `;
 
 export const ChatContainer = styled(Box) <StyledProps>`
-  width: 100%;
-  max-width: 600px;
-  height: 700px;
+  max-width: ${(props) => (props.chatBotWeight ? props.chatBotWeight : '450px')};
+  height: ${(props) => (props.chatBotHeight ? props.chatBotHeight : '700px')};
   display: flex;
   flex-direction: column;
   border-radius: 20px;
@@ -113,7 +112,6 @@ export const MessageBox = styled(Paper) <StyledProps>`
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  max-width: 70%;
   border-radius: ${({ isUser }) =>
     isUser ? "20px 20px 4px 20px" : "20px 20px 20px 4px"};
   background: ${({ isUser, themeColor }) =>

@@ -75,6 +75,11 @@ export type ChatProps = {
   APIStoreResponseDataEndpoint?: string;
   APIAccessToken?: string;
   APIHttpMethod?: "POST" | "GET" | "PUT";
+  chatBotHeight?:string;
+  chatBotWeight?:string;
+  leadFormHeader?:string;
+  leadFormDescription?:string;
+  leadFormButtonText?:string;
 };
 
 // Speech Recognition type definition
@@ -101,6 +106,11 @@ const Chat = ({
   APIStoreResponseDataEndpoint = "",
   APIAccessToken = "",
   APIHttpMethod = "POST",
+  chatBotHeight,
+  chatBotWeight,
+  leadFormHeader,
+  leadFormDescription,
+  leadFormButtonText
 }: ChatProps) => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [recognition, setRecognition] = useState<any>(null);
@@ -340,7 +350,7 @@ const Chat = ({
         </IconButton>
       )}
 
-      <ChatContainer open={isChatOpen}>
+      <ChatContainer open={isChatOpen} chatBotWeight={chatBotWeight} chatBotHeight={chatBotHeight}>
         <ChatHeader themeColor={themeColor}>
           <ChatTitle>
             <StyleImage>
@@ -365,6 +375,9 @@ const Chat = ({
             form={formConfig}
             shouldDisplayForm={shouldDisplayForm}
             onSubmit={handleFormSubmit}
+            leadFormHeader={leadFormHeader}
+            leadFormDescription={leadFormDescription}
+            leadFormButtonText={leadFormButtonText}
           />
         ) : (
           <>
@@ -539,7 +552,6 @@ const Chat = ({
               </ActionButton>
 
               <StyledTextField
-                fullWidth
                 variant="outlined"
                 placeholder="Type a message..."
                 size="small"

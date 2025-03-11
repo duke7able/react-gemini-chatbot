@@ -33,6 +33,12 @@ A modern, customizable React chatbot component that integrates with Google's Gem
   <img src="/public/chatbot.gif" alt="React Gemini Chatbot" width="80%" />
 </p>
 
+### Lead Form Demo
+
+<p align="center">
+  <img src="/public/leadFormVideo.gif" alt="lead form video" width="80%" />
+</p>
+
 ## Features
 
 - 🤖 Integration with Google Gemini AI API
@@ -112,9 +118,14 @@ Make sure you have the required dependencies installed in your project.
 | `approach` | Array | `[]` | _No_ | The `approach` array is used to prime the Large Language Model (LLM) or Chatbot with a specific conversation style, persona, or expected dialogue flow. Each object in the array represents a single turn in a conversation, defining what the `user` would say and the corresponding, desired response from the `agent` (the LLM/Chatbot). |
 | `backGroundImage` | string | `"https://img.freepik.com/free-vector/light-grey-dots-background_78370-2583.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"` | _No_ | To set your own background image, pass the image URL or path as a string (e.g., `"https://placehold.co/600x400"`). |
 | `chatOpen` | boolean | `true` | _No_ | Controls the visibility of the chat window (open or closed). |
+| `chatBotHeight` | string | `"450px"` | _No_ | If you want to change the height of chatbot you have to pass the value eg-("450px")|
+| `chatBotWeight` | string | `"700px"` | _No_ | If you want to change the wieght of chatbot you have to pass the value eg-("700px")|
 | `descriptionOfChatbot` | string | `"Start a conversation by typing a message below"` | _No_ | To display your own description of the chatbot, pass a value as a string. |
 | `enableLeadform` | boolean | `"false"` | _No_ | Set to `true` to enable the LeadForm so users can fill it. If `false`, the form is disabled. |
 | `goodFormatting` | boolean | `true` | _No_ | `goodFormatting` set to true, adds instructions for well-structured, readable responses with appropriate formatting. |
+| `leadFormHeader` | string | `"Please complete the form."` | _No_ | If you want to change the header text of leadform you have to pass the value as string.|
+| `leadFormDescription` | string | `"Fill out the information below to continue the conversation."` | _No_ | If you want to change the description text of leadform you have to pass the value as string.|
+| `leadFormButtonText` | string | `"Submit"` | _No_ | If you want to change the Button text of leadform you have to pass the value as string.|
 | `header` | string | `"ChatOrbit"` | _No_ | To display your own chatbot header, pass a value as a string. |
 | `headerDescription` | string | `"Ready to help"` | _No_ | To display your own header description for the chatbot, pass a value as a string. |
 | `imageUrl` | string | `"https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg?ga=GA1.1.1236369542.1738934698&semt=ais_hybrid"` | _No_ | URL for the chatbot's avatar image. |
@@ -128,7 +139,6 @@ Make sure you have the required dependencies installed in your project.
 | `tone` | string | `"formal"` | _No_ | If specified, instructs the model to respond in the requested tone. |
 | `useContext` | boolean | `false` | _No_ | Whether to maintain conversation context. |
 | `useEmoji` | boolean | `false` | _No_ | When set to true, instructs the model to include appropriate emojis in responses. |
-
 
 # Backend Api To Store Data
 
@@ -211,7 +221,7 @@ const leadForm = {
 
 The `approach` feature allows users to set a **zero-shot** approach for the chatbot or language model. In this case, the model is primed with a set of example interactions, enabling it to generate responses based on the patterns in the examples, even when no additional context is provided. However, for some use cases, a **one-shot** or **few-shot** approach might produce output that is more closely aligned with user expectations, especially when more detailed context or instruction is required.
 
-For more details, refer to the [Gemini API Documentation](https://ai.google.dev/gemini-api/docs/text-generation?lang=python).
+For more details, refer to the [Gemini text generation docs](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#:~:text=In%20this%20case%2C%20the%20prompt%20("Explain%20how%20AI%20works")%20doesn't%20include%20any%20output%20examples%2C%20system%20instructions%2C%20or%20formatting%20information.).
 
 **Approach Array of JSON Example:**
 
