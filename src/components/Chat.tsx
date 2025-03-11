@@ -150,7 +150,7 @@ const Chat = ({
         label: "number",
         placeholder: "Enter your Phone Number",
         type: "number",
-        validationRegex: "^\\d{10}$",
+        validationRegex: "^(0|\\+91)?\\d{10}$",
         validationMessage: "Please enter a valid phone number",
         required: false,
       },

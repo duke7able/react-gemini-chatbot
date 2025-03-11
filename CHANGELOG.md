@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.7 (2025-03-11)
+
+### Fix
+
+- Regex Validation of default form field of phone number fix to allow 0 and +91 at starting.
+- Both Demo video align in same line.
+- Add HomePage link in Package.json.
+
 ## 1.3.6 (2025-03-11)
 
 ### Feature
