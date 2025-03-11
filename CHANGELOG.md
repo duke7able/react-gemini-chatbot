@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.8 (2025-03-11)
+
+### Fix
+
+- Fixed the casing issue in readme to show gifs
+- Re Added repository link in Package.json.
+
 ## 1.3.7 (2025-03-11)
 
 ### Fix

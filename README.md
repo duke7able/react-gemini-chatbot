@@ -30,10 +30,10 @@ A modern, customizable React chatbot component that integrates with Google's Gem
 ### Demo
 
 <p align="center">
-  <img src="/public/newChatBot.gif" alt="React Gemini Chatbot" width="35%" height="50%" />
+  <img src="/public/newchatbot.gif" alt="React Gemini Chatbot" width="35%" height="50%" />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="/public/newLeadForm.gif" alt="lead form video" width="35%" height="50%"/>
+  <img src="/public/newleadform.gif" alt="lead form video" width="35%" height="50%"/>
 </p>
 
 ## Features
